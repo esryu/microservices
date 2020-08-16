@@ -1,29 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udagram-feed
   labels:
-    service: udagram-feed
+    service: backend-feed
+  name: backend-feed
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      service: udagram-feed
+      service: backend-feed
   template:
     metadata:
       labels:
-        service: udagram-feed
+        service: backend-feed
     spec:
       containers:
-      - name: udagram-feed
-        image: estherryu33/udagram-feed:latest
+      - image: estherryu33/microservice-project:udagram-backend-feed
+        name: backend-feed
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "64Mi"
             cpu: "250m"
           limits:
             memory: "1024Mi"
-            cpu: "500m"                  
+            cpu: "500m"
         env:
         - name: URL
           valueFrom:
@@ -67,13 +68,13 @@ spec:
               key: POSTGRES_PASSWORD
         - name: POSTGRES_USERNAME
           valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: POSTGRES_USERNAME      
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRES_USERNAME
         volumeMounts:
         - name: aws-secret
           mountPath: "/root/.aws/"
-          readOnly: true        
+          readOnly: true
       restartPolicy: Always
       volumes:
       - name: aws-secret

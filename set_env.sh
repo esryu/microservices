@@ -10,3 +10,5 @@ export AWS_PROFILE=default;
 export JWT_SECRET=helloworld;
 export URL=http://localhost:8100;
 echo "is this being processed";
+export DOCKER_USERNAME=estherryu33;
+export DOCKER_PASSWORD=reLocation3!;

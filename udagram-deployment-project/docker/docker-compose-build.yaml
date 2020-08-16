@@ -7,7 +7,7 @@ services:
   backend_user:
     build:
       context: ../../udagram-backend-user
-    image: mercicle/microservice-project:udagram-backend-user
+    image: estherryu33/microservice-project:udagram-backend-user
   backend_feed:
     build:
       context: ../../udagram-backend-feed
